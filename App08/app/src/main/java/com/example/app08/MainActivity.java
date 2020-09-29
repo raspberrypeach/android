@@ -1,7 +1,5 @@
 package com.example.app08;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MenuActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_CUSTOMER = 201;
     public static final int REQUEST_CODE_REVENUE = 202;
     public static final int REQUEST_CODE_PRODUCT = 203;
@@ -17,7 +17,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_main);
 
         // process received intent
         Intent receivedIntent = getIntent();
@@ -26,21 +26,10 @@ public class MenuActivity extends AppCompatActivity {
 
         Toast.makeText(this, "username : " + username + ", password : " + password, Toast.LENGTH_LONG).show();
 
-        Button backButton = (Button) findViewById(R.id.backButton);
-        backButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("message", "result message is OK!");
-
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
-        });
-
         Button menu01Button = (Button) findViewById(R.id.menu01Button);
-        menu01Button.setOnClickListener(new OnClickListener() {
+        menu01Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
+                Intent intent = new Intent(getApplicationContext(), customerActivity.class);
                 intent.putExtra("titleMsg", "고객관리 화면");
 
                 startActivityForResult(intent, REQUEST_CODE_CUSTOMER);
@@ -48,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         Button menu02Button = (Button) findViewById(R.id.menu02Button);
-        menu02Button.setOnClickListener(new OnClickListener() {
+        menu02Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RevenueActivity.class);
                 intent.putExtra("titleMsg", "매출관리 화면");
@@ -58,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         Button menu03Button = (Button) findViewById(R.id.menu03Button);
-        menu03Button.setOnClickListener(new OnClickListener() {
+        menu03Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
                 intent.putExtra("titleMsg", "상품관리 화면");
