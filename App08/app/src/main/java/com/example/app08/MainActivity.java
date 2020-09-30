@@ -79,11 +79,16 @@ public class MainActivity extends AppCompatActivity {
                 if (message != null) {
                     Toast toast = Toast.makeText(getBaseContext(), "매출관리 응답, result code : " + resultCode + ", message : " + message, Toast.LENGTH_LONG);
                     toast.show();
+
+                    if (message.equals("login")) {
+                        finish();
+                    }
                 }
             } else if (requestCode == REQUEST_CODE_PRODUCT) {
                 String message = intent.getStringExtra("message");
 
                 if (message != null) {
+
                     Toast toast = Toast.makeText(getBaseContext(), "상품관리 응답, result code : " + resultCode + ", message : " + message, Toast.LENGTH_LONG);
                     toast.show();
                 }
