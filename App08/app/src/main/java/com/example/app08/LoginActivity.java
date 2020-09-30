@@ -1,3 +1,5 @@
+package com.example.app08;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,40 +9,39 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.app08.R;
-
-
 public class LoginActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_MENU = 101;
 
-    EditText usernameInput;
-    EditText passwordInput;
+    EditText username;
+    EditText password;
+    Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginButton = (Button) findViewById(R.id.loginButton);
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.userpasswd);
+        loginButton = findViewById(R.id.loginButton);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String username = usernameInput.getText().toString();
-                String password = passwordInput.getText().toString();
+                // name, password
+                String name = username.getText().toString();
+                String passwd = password.getText().toString();
 
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("password", password);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class); // LoginActivity -> MainActivity
+                intent.putExtra("username", name);
+                intent.putExtra("password", passwd);
 
                 startActivityForResult(intent, REQUEST_CODE_MENU);
             }
         });
 
-        usernameInput = (EditText) findViewById(R.id.usernameInput);
-        passwordInput = (EditText) findViewById(R.id.passwordInput);
-
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) { //get Result from next Activity
         super.onActivityResult(requestCode, resultCode, intent);
 
         if (requestCode == REQUEST_CODE_MENU) {

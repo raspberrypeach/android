@@ -1,6 +1,5 @@
 package com.example.app08;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,42 +13,47 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_REVENUE = 202;
     public static final int REQUEST_CODE_PRODUCT = 203;
 
+    Button CustomerButton;
+    Button SalesButton;
+    Button productButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // process received intent
+        // process received intent (LoginActivity, CustomerActivity ...)
         Intent receivedIntent = getIntent();
         String username = receivedIntent.getStringExtra("username");
         String password = receivedIntent.getStringExtra("password");
 
         Toast.makeText(this, "username : " + username + ", password : " + password, Toast.LENGTH_LONG).show();
 
-        Button menu01Button = (Button) findViewById(R.id.menu01Button);
-        menu01Button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), customerActivity.class);
+        CustomerButton = findViewById(R.id.customerButton);
+        CustomerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { // click first button
+                Intent intent = new Intent(getApplicationContext(), CustomerActivity.class); //Main -> Customer
                 intent.putExtra("titleMsg", "고객관리 화면");
 
                 startActivityForResult(intent, REQUEST_CODE_CUSTOMER);
             }
         });
 
-        Button menu02Button = (Button) findViewById(R.id.menu02Button);
-        menu02Button.setOnClickListener(new View.OnClickListener() {
+        SalesButton = findViewById(R.id.salesButton);
+        SalesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RevenueActivity.class);
+                System.out.println("acacac");
+                Intent intent = new Intent(getApplicationContext(), SalesActivity.class); //Main -> Sales
                 intent.putExtra("titleMsg", "매출관리 화면");
 
                 startActivityForResult(intent, REQUEST_CODE_REVENUE);
             }
         });
 
-        Button menu03Button = (Button) findViewById(R.id.menu03Button);
-        menu03Button.setOnClickListener(new View.OnClickListener() {
+        productButton = (Button) findViewById(R.id.productButton);
+        productButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProductActivity.class); //Main -> product
                 intent.putExtra("titleMsg", "상품관리 화면");
 
                 startActivityForResult(intent, REQUEST_CODE_PRODUCT);
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) { // get Result from next Activity
         super.onActivityResult(requestCode, resultCode, intent);
 
         if (intent != null) {
