@@ -17,7 +17,7 @@ public class viewerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.
+        ViewGroup rootview = (ViewGroup) inflater.inflate();
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
